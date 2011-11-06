@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<channel> 
+	<title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title> 
+	<language>fr-be</language>
+	<itunes:author>RTBF</itunes:author>
+	<itunes:image href="http://ds.static.rtbf.be/media/video/thumbnails/137/154/3/d1405157dcb55b6d0500f794072aa22b/large.jpg" />
+	<itunes:subtitle>Video Podcast non officiel hacké pour vous par @xdamman</itunes:subtitle>
+	<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>
+	<itunes:category text="News &amp; Politics"/>
+	<link>http://thinkornot.com/hacks/rtbfpodcast.xml</link>
+<item> 
+	<title>5/11 JT 19h30</title> 
+	<enclosure url="http://static.infomaniak.ch/dl/04d5a007e1d24c10377c3a42c64f4747/4eb5c9bb/vodstatic/27/info__jt_051120111930__051120111930.3218.435.mp4"	length="100000000" type="video/mpeg"/> 
+	<pubDate>Sat Nov 05 2011 11:29:59 GMT-0700 (PDT)</pubDate> 
+</item>
+<item> 
+	<title>4/11 JT 19h30</title> 
+	<enclosure url="http://static.infomaniak.ch/dl/b09fc0b2d1fc03bff9fde35e90adf6ad/4eb5c9bc/vodstatic/27/info__jt_041120111930__041120111930.3218.435.mp4"	length="100000000" type="video/mpeg"/> 
+	<pubDate>Fri Nov 04 2011 11:29:59 GMT-0700 (PDT)</pubDate> 
+</item>
+<item> 
+	<title>3/11 JT 19h30</title> 
+	<enclosure url="http://static.infomaniak.ch/dl/add782a97c5bf80ce9d84164bf62619c/4eb5c9bc/vodstatic/27/info__jt_031120111930__031120111930.3218.435.mp4"	length="100000000" type="video/mpeg"/> 
+	<pubDate>Thu Nov 03 2011 11:30:00 GMT-0700 (PDT)</pubDate> 
+</item>
+<item> 
+	<title>2/11 JT 19h30</title> 
+	<enclosure url="http://static.infomaniak.ch/dl/7abef38123a9a8e24be30e348ea20d86/4eb5c9bd/vodstatic/27/info__jt_021120111930__021120111930.3218.435.mp4"	length="100000000" type="video/mpeg"/> 
+	<pubDate>Wed Nov 02 2011 11:29:59 GMT-0700 (PDT)</pubDate> 
+</item>
+<item> 
+	<title>1/11 JT 19h30</title> 
+	<enclosure url="http://static.infomaniak.ch/dl/6131aea34d452eb4b2c60c90469845fd/4eb5c9be/vodstatic/27/info__jt_011120111930__011120111930.3218.435.mp4"	length="100000000" type="video/mpeg"/> 
+	<pubDate>Tue Nov 01 2011 11:30:00 GMT-0700 (PDT)</pubDate> 
+</item>
+</channel></rss>
