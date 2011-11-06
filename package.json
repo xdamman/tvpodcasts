@@ -14,7 +14,7 @@
   "dependencies": {
 		"feedparser" : "0.3.0"
 		"async" : "0.1.15"
-		"jsdom" : "0.2.9"
+		"express" : "2.5.0"
   },
   "devDependencies": {}
 }
