@@ -2,19 +2,25 @@ var fs = require("fs")
 	, express = require("express")
 	, feedlib = require("./lib/feedlib");
 
-var interval = 60; // Updating the feed every 15 minutes
+var interval = 15*60; // Updating the feed every 15 minutes
 
 var app = express.createServer(
 						express.logger()
 					)
 	, feed;
 
-setInterval(function() {
-	var date = new Date();
+function updateFeed() {
 	feedlib.generateFeed(function(rssfeed) {
 		feed = rssfeed;
 	});
+}
+
+setInterval(function() {
+	var date = new Date();
+	updateFeed();
 }, interval*1000);
+
+updateFeed();
 
 app.get('/rtbfpodcast.xml', function(req, res){
 	res.contentType("xml");
