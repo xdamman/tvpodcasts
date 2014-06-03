@@ -1,20 +1,22 @@
 {
   "author": "Xavier Damman <xdamman@gmail.com>",
   "name": "rtbfpodcast",
-  "description": "RSS Feed generator for the RTBF 19h30 for the Apple TV"
-  "version": "0.0.1",
-  "homepage": "http://github.com/xdamman/rtbfpodcast"
+  "description": "RSS Feed generator for the RTBF 19h30 for the Apple TV",
+  "version": "0.0.2",
+  "homepage": "http://github.com/xdamman/rtbfpodcast",
   "repository": {
     "url": ""
   },
   "main": "./",
   "engines": {
-    "node": ">= v0.4.7"
+    "node": ">= v0.8.7"
   },
   "dependencies": {
-		"feedparser" : "0.3.0"
-		"async" : "0.1.15"
-		"express" : "2.5.0"
+    "request": "^2.36.0",
+    "async": "^0.9.0",
+    "feedparser": "^0.17.0",
+    "express": "^4.4.1",
+    "express-logger": "0.0.3"
   },
   "devDependencies": {}
 }

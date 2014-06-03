@@ -1,13 +1,14 @@
 var fs = require("fs")
 	, express = require("express")
+  , logger = require("express-logger")
 	, feedlib = require("./lib/feedlib");
 
 var interval = 15*60; // Updating the feed every 15 minutes
 
-var app = express.createServer(
-						express.logger()
-					)
+var app = express()
 	, feed;
+
+app.use(logger({path:'logs/access.log'}));
 
 function updateFeed() {
 	feedlib.generateFeed(function(rssfeed) {
