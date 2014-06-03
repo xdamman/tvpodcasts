@@ -1,2 +1,2 @@
-.nodester.appconfig
+logs/*.log
 node_modules

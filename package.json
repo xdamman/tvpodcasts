@@ -9,7 +9,7 @@
   },
   "main": "./",
   "engines": {
-    "node": ">= v0.8.7"
+    "node": ">= v0.10.x"
   },
   "dependencies": {
     "request": "^2.36.0",
