@@ -8,7 +8,7 @@ Every 15 minutes, it fetches the RSS feed of the latest RTBF 19h30 journal avail
 
 In iTunes, click in the menu "Advanced", then "Subscribe to podcast..." and enter the following URL:
 
-    http://rtbfpodcast.nodester.com/rtbfpodcast.xml
+    http://rtbfpodcast.herokuapp.com/rtbfpodcast.xml
 
 ## How to run it locally?
 
