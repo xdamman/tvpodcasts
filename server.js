@@ -32,6 +32,8 @@ app.get('/', function(req, res) {
 	res.redirect("http://github.com/xdamman/rtbfpodcast");
 });
 
+app.use('/downloads',express.static("downloads/"));
+
 var port = process.env.PORT || 12441;
 app.listen(port);
 console.info("app listening on port "+port);

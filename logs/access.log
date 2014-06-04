@@ -1,2 +1,7 @@
 
 127.0.0.1 - - [Wed, 04 Jun 2014 04:37:38 GMT] "GET /rtbfpodcast.xml HTTP/1.1" 200 2408 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36"
+127.0.0.1 - - [Wed, 04 Jun 2014 06:51:06 GMT] "GET / HTTP/1.1" 302 71 "-" "curl/7.30.0"
+127.0.0.1 - - [Wed, 04 Jun 2014 06:51:14 GMT] "GET /downloads/1931522.mp4 HTTP/1.1" 404 - "-" "curl/7.30.0"
+127.0.0.1 - - [Wed, 04 Jun 2014 06:51:29 GMT] "GET /downloads/1931522.mp4 HTTP/1.1" 404 - "-" "curl/7.30.0"
+127.0.0.1 - - [Wed, 04 Jun 2014 06:51:45 GMT] "GET /downloads/1931522.mp4 HTTP/1.1" 404 - "-" "curl/7.30.0"
+127.0.0.1 - - [Wed, 04 Jun 2014 06:52:15 GMT] "GET /downloads/1931522.mp4 HTTP/1.1" 200 744371 "-" "curl/7.30.0"
