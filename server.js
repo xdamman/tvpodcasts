@@ -33,6 +33,7 @@ app.get('/', function(req, res) {
 });
 
 app.use('/downloads',express.static("downloads/"));
+app.use('/img',express.static("img/"));
 
 var port = process.env.PORT || 12441;
 app.listen(port);
