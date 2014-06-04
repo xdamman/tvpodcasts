@@ -15,8 +15,10 @@ describe('utils', function() {
   it('makes sure the downloads directory is empty', function(done) {
     utils.cleanDownloads(0, function() {
       var files = fs.readdirSync(DOWNLOADS_DIR);
-      expect(files.length).to.equal(0);
-      done();
+      setTimeout(function() {
+        expect(files.length).to.equal(0);
+        done();
+      }, 200);
     });
   });
 

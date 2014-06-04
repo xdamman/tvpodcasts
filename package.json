@@ -5,7 +5,11 @@
   "version": "0.0.2",
   "homepage": "http://github.com/xdamman/rtbfpodcast",
   "repository": {
-    "url": ""
+    "type":"git",
+    "url": "https://github.com/xdamman/rtbfpodcast.git"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/"
   },
   "main": "./",
   "engines": {
