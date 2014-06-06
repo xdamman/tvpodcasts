@@ -9,6 +9,7 @@
     "url": "https://github.com/xdamman/rtbfpodcast.git"
   },
   "scripts": {
+    "stop": "curl localhost/stop",
     "test": "./node_modules/mocha/bin/mocha test/"
   },
   "main": "./",

@@ -45,6 +45,14 @@ app.get('/', function(req, res) {
 	res.redirect("https://github.com/xdamman/rtbfpodcast");
 });
 
+app.get('/stop', function(req, res, next) {
+  if(req.socket.remoteAddress == "127.0.0.1") {
+    res.send("Shutting down server...\n");
+    process.exit(0);
+  }
+  else return next();
+});
+
 app.use('/status', require('./lib/status'));
 app.use('/downloads',express.static("downloads/"));
 app.use('/img',express.static("img/"));
