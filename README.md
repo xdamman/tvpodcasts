@@ -6,9 +6,11 @@ Every 15 minutes, it fetches the RSS feed of the latest RTBF 19h30 journal avail
 
 ## How to add the feed to iTunes?
 
-In iTunes, click in the menu "Advanced", then "Subscribe to podcast..." and enter the following URL:
+Click on this link: https://itunes.apple.com/us/podcast/journal-19h30-la-rtbf-video/id885999509 
 
-    http://rtbfpodcast.herokuapp.com/rtbfpodcast.xml
+Or in iTunes find the menu "Subscribe to podcast..." and enter the following URL:
+
+    http://rtbfpodcast.xdamman.com/rtbfpodcast.xml
 
 ## How to run it locally?
 
