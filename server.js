@@ -4,6 +4,7 @@ var fs = require("fs")
 	, feedlib = require("./lib/feedlib")
   , utils = require("./lib/utils")
   , humanize = require('humanize')
+  , package = require('./package.json')
   ;
 
 var interval = 12*60; // Updating the feed every 12 minutes
@@ -48,7 +49,7 @@ app.get('/', function(req, res) {
 app.get('/stop', function(req, res, next) {
   if(req.socket.remoteAddress == "127.0.0.1") {
     res.send("Shutting down server...\n");
-    process.exit(0);
+    process.exit(1);
   }
   else return next();
 });
@@ -58,4 +59,4 @@ app.use('/downloads',express.static("downloads/"));
 app.use('/img',express.static("img/"));
 
 app.listen(port);
-console.info("app listening on port "+port);
+console.info("app v"+package.version+" listening on port "+port);
