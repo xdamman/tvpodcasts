@@ -1,24 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
                   <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
-                  <channel>
-                    <title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title>
-                    <language>fr-be</language>
-                    <itunes:author>@xdamman</itunes:author>
-                    <itunes:image href="http://rtbfpodcast.xdamman.com/img/rtbf-19h30.jpg" />
-                    <itunes:subtitle>Video Podcast</itunes:subtitle>
-                    <description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>
-                    <itunes:category text="News &amp; Politics"/>
-                    <link>http://rtbfpodcast.xdamman.com/rtbfpodcast.xml</link>
-<item>
-                          <title>5/6 JT 19h30</title>
-                          <enclosure url="http://rtbfpodcast.xdamman.com/downloads/1933151.mp4" length="undefined" type="video/mpeg"/>
-                          <pubDate>Thu, 05 Jun 2014 17:30:00 GMT</pubDate>
-                          <guid>http://rtbfpodcast.xdamman.com/downloads/1933151.mp4</guid>
+                  <channel> 
+                  	<title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title> 
+                  	<language>fr-be</language>
+                  	<itunes:author>@xdamman</itunes:author>
+                  	<itunes:image href="http://rtbfpodcast.xdamman.com/img/rtbf-19h30.jpg" />
+                  	<itunes:subtitle>Video Podcast</itunes:subtitle>
+                  	<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>
+                  	<itunes:category text="News &amp; Politics"/>
+                  	<link>http://rtbfpodcast.xdamman.com/rtbfpodcast.xml</link>
+<item> 
+                        	<title>6/6 JT 19h30</title> 
+                        	<enclosure url="http://rtbfpodcast.xdamman.com/downloads/1933506.mp4"	length="516498166" type="video/mpeg"/> 
+                        	<pubDate>Fri, 06 Jun 2014 17:29:00 GMT</pubDate> 
+                        	<guid>http://rtbfpodcast.xdamman.com/downloads/1933506.mp4</guid> 
                         </item>
-<item>
-                          <title>4/6 JT 19h30</title>
-                          <enclosure url="http://rtbfpodcast.xdamman.com/downloads/1932822.mp4" length="undefined" type="video/mpeg"/>
-                          <pubDate>Wed, 04 Jun 2014 17:29:59 GMT</pubDate>
-                          <guid>http://rtbfpodcast.xdamman.com/downloads/1932822.mp4</guid>
+<item> 
+                        	<title>5/6 JT 19h30</title> 
+                        	<enclosure url="http://rtbfpodcast.xdamman.com/downloads/1933151.mp4"	length="825939415" type="video/mpeg"/> 
+                        	<pubDate>Thu, 05 Jun 2014 17:30:00 GMT</pubDate> 
+                        	<guid>http://rtbfpodcast.xdamman.com/downloads/1933151.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>4/6 JT 19h30</title> 
+                        	<enclosure url="http://rtbfpodcast.xdamman.com/downloads/1932822.mp4"	length="483967282" type="video/mpeg"/> 
+                        	<pubDate>Wed, 04 Jun 2014 17:29:59 GMT</pubDate> 
+                        	<guid>http://rtbfpodcast.xdamman.com/downloads/1932822.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>3/6 JT 19h30</title> 
+                        	<enclosure url="http://rtbfpodcast.xdamman.com/downloads/1932511.mp4"	length="507216862" type="video/mpeg"/> 
+                        	<pubDate>Tue, 03 Jun 2014 17:29:58 GMT</pubDate> 
+                        	<guid>http://rtbfpodcast.xdamman.com/downloads/1932511.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>2/6 JT 19h30</title> 
+                        	<enclosure url="http://rtbfpodcast.xdamman.com/downloads/1932222.mp4"	length="479395481" type="video/mpeg"/> 
+                        	<pubDate>Mon, 02 Jun 2014 17:30:00 GMT</pubDate> 
+                        	<guid>http://rtbfpodcast.xdamman.com/downloads/1932222.mp4</guid> 
                         </item>
 </channel></rss>
