@@ -2,13 +2,14 @@ var fs = require("fs")
 	, express = require("express")
   , logger = require("express-logger")
 	, feedlib = require("./lib/feedlib")
+  , utils = require("./lib/utils")
   , humanize = require('humanize')
   ;
 
 var interval = 12*60; // Updating the feed every 12 minutes
 
 var app = express()
-	, feed;
+	, feed = utils.restoreFeed();
 
 
 var port = process.env.PORT || 12441;
