@@ -28,6 +28,7 @@ var guignolsFeed = new CplusProvider({
   , title: "ホーン情報"
   , description: "No description"
   , query: "guignols"
+  , filter: function(item) { return item.RUBRIQUAGE.CATEGORIE.match(/SEMAINE|QUOTIDIEN/); }
 });
 
 server.use(logger({path:'logs/access.log'}));

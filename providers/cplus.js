@@ -29,6 +29,7 @@ module.exports = function(server) {
       , description: options.description
       , category: options.category || "Society &amp; Culture" || "News &amp; Politics"
       , cover: options.cover || server.set('base_url')+'/img/'+options.feedname+'.jpg'
+      , filter: (typeof options.filter == 'function') ? options.filter : function(item) { return true; }
     };
 
     this.updateFeed = function(cb) {
@@ -46,17 +47,21 @@ module.exports = function(server) {
 
         _.forEach(body, function(item) {
 
-          if(i++ >= MAX_ITEMS) return;
-
           if(!item.INFOS.PUBLICATION) {
             console.error("Invalid item -- missing date", item);
             return;
           }
 
+          if(!self.feed.filter(item)) {
+            return;
+          }
+
+          if(i++ >= MAX_ITEMS) return;
+
           var info = {
               id: item.ID
             , title: self.feed.title+" "+ item.INFOS.PUBLICATION.DATE // item.INFOS.TITRAGE.SOUS_TITRE
-            , description: self.feed.description || item.INFOS.DESCRIPTION
+            , description: item.RUBRIQUAGE.CATEGORIE + " " + (self.feed.description || item.INFOS.DESCRIPTION)
             , thumbnail: item.MEDIA.IMAGES.GRAND
             , video: item.MEDIA.VIDEOS.HLS
             , pubDate: item.INFOS.PUBLICATION.DATE+" "+item.INFOS.PUBLICATION.HEURE
