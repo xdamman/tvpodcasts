@@ -125,7 +125,7 @@ module.exports = function(server) {
       var duration = (new Date) - start_time;
       console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
       item.filesize = fs.statSync(item.filepath).size;
-      utils.cleanDownloads('cplus/');
+      utils.cleanDownloads('cplus/', MAX_ITEMS);
       return cb(null, item);
     });
 

@@ -87,7 +87,7 @@ module.exports = function(server) {
         if(err) { console.error(err); }
 
         console.log("all " + items.length + " videos downloaded");
-        utils.cleanDownloads('rtbf/');
+        utils.cleanDownloads('rtbf/', MAX_ITEMS);
 
         generateFeed(items, cb);
       });
