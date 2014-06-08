@@ -61,6 +61,10 @@ server.get('/', function(req, res) {
 	res.redirect("https://github.com/xdamman/rtbfpodcast");
 });
 
+server.get('/robots.txt', function(req, res) {
+  res.sendfile('robots.txt');
+});
+
 server.get('/stop', function(req, res, next) {
   if(req.socket.remoteAddress == "127.0.0.1") {
     res.send("Shutting down server...\n");
