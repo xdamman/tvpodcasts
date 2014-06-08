@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+                  <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+                  <channel> 
+                  	<title>Le Zapping - Canal Plus (France)</title> 
+                  	<language>fr-FR</language>
+                  	<itunes:author>@xdamman</itunes:author>
+                  	<itunes:image href="http://localhost:8080/img/zapping.jpg" />
+                  	<itunes:subtitle>Video Podcast</itunes:subtitle>
+                  	<description>Retrouvez tous les jours le meilleur et le pire de la television francaise sur votre AppleTV, iPad ou iPhone.</description>
+                  	<itunes:category text="News &amp; Politics"/>
+                  	<link>http://localhost:8080/zapping.xml</link>
+<item> 
+                      	<title>Le Zapping 06/06/14</title> 
+                      	<enclosure url="http://localhost:8080/downloads/cplus/1083299.mp4" length="24631541" type="video/mpeg"/> 
+                      	<pubDate>06/06/2014 13:00:00</pubDate> 
+                      	<guid>http://localhost:8080/downloads/cplus/1083299.mp4</guid> 
+                      </item>
+<item> 
+                      	<title>Le Zapping 05/06/14</title> 
+                      	<enclosure url="http://localhost:8080/downloads/cplus/1082679.mp4" length="18895477" type="video/mpeg"/> 
+                      	<pubDate>05/06/2014 13:00:00</pubDate> 
+                      	<guid>http://localhost:8080/downloads/cplus/1082679.mp4</guid> 
+                      </item>
+<item> 
+                      	<title>Le Zapping 04/06/14</title> 
+                      	<enclosure url="http://localhost:8080/downloads/cplus/1082083.mp4" length="19699244" type="video/mpeg"/> 
+                      	<pubDate>04/06/2014 13:00:00</pubDate> 
+                      	<guid>http://localhost:8080/downloads/cplus/1082083.mp4</guid> 
+                      </item>
+<item> 
+                      	<title>Le Zapping 03/06/14</title> 
+                      	<enclosure url="http://localhost:8080/downloads/cplus/1081479.mp4" length="23724670" type="video/mpeg"/> 
+                      	<pubDate>03/06/2014 13:00:00</pubDate> 
+                      	<guid>http://localhost:8080/downloads/cplus/1081479.mp4</guid> 
+                      </item>
+<item> 
+                      	<title>Le Zapping 02/06/14</title> 
+                      	<enclosure url="http://localhost:8080/downloads/cplus/1080842.mp4" length="25754893" type="video/mpeg"/> 
+                      	<pubDate>02/06/2014 13:00:00</pubDate> 
+                      	<guid>http://localhost:8080/downloads/cplus/1080842.mp4</guid> 
+                      </item>
+</channel></rss>

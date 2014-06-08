@@ -1,45 +1,44 @@
 var fs = require("fs")
 	, express = require("express")
   , logger = require("express-logger")
-	, feedlib = require("./lib/feedlib")
   , utils = require("./lib/utils")
   , humanize = require('humanize')
   , package = require('./package.json')
+  , async = require('async')
   ;
 
-var interval = 12*60; // Updating the feed every 12 minutes
+var FEEDS_UPDATE_INTERVAL = 12*60; // Updating the feed every 12 minutes
 
 var app = express()
-	, feed = utils.restoreFeed();
 
+var rtbf = require('./providers/rtbf')(app);
+var cplus = require('./providers/cplus')(app);
 
-var port = process.env.PORT || 12441;
-app.set('port',port);
+app.set('port', process.env.PORT || 12441);
 
 app.use(logger({path:'logs/access.log'}));
 
+app.use('/status', require('./lib/status'));
+app.use('/downloads',express.static("downloads/"));
+app.use('/feeds',express.static("feeds/"));
+app.use('/img',express.static("img/"));
+
 
 app.status = 'idle';
-function updateFeed() {
-  app.status = 'updating_feed';
-	feedlib.generateFeed(function(rssfeed) {
-    app.status = 'idle';
-		feed = rssfeed;
-	});
-}
+function updateFeeds() {
+  if(app.status == 'idle') {
+    app.status = 'updating_feed';
+    async.parallel([rtbf.updateFeed, cplus.updateFeed], function(err, results) {
+      app.status = 'idle';
+    });
+  }
+};
 
-setInterval(function() {
-
-  if(app.status == 'idle') 
-    updateFeed();
-
-}, interval*1000);
-
-updateFeed();
+updateFeeds();
+setInterval(updateFeeds, FEEDS_UPDATE_INTERVAL * 1000);
 
 app.get('/rtbfpodcast.xml', function(req, res){
-	res.contentType("xml");
-  res.send(feed);
+	res.redirect('/feeds/rtbfpodcast.xml');
 });
 
 app.get('/', function(req, res) {
@@ -54,9 +53,5 @@ app.get('/stop', function(req, res, next) {
   else return next();
 });
 
-app.use('/status', require('./lib/status'));
-app.use('/downloads',express.static("downloads/"));
-app.use('/img',express.static("img/"));
-
-app.listen(port);
-console.info("app v"+package.version+" listening on port "+port);
+app.listen(app.set('port'));
+console.info("app v"+package.version+" listening on port "+app.set('port'));
