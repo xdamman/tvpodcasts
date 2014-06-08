@@ -2,7 +2,7 @@
   "author": "Xavier Damman <xdamman@gmail.com>",
   "name": "rtbfpodcast",
   "description": "RSS Feed generator for the RTBF 19h30 for the Apple TV",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://github.com/xdamman/rtbfpodcast",
   "repository": {
     "type": "git",
