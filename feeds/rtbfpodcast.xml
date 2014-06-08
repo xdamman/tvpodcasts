@@ -4,11 +4,11 @@
                     	<title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title> 
                     	<language>fr-be</language>
                     	<itunes:author>@xdamman</itunes:author>
-                    	<itunes:image href="undefined/img/rtbf-19h30.jpg" />
+                    	<itunes:image href="http://tvpodcasts.xdamman.com/img/rtbf-19h30.jpg" />
                     	<itunes:subtitle>Video Podcast</itunes:subtitle>
                     	<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>
                     	<itunes:category text="News &amp; Politics"/>
-                    	<link>undefined/feeds/rtbfpodcast.xml</link>
+                    	<link>http://tvpodcasts.xdamman.com/feeds/rtbfpodcast.xml</link>
 <item> 
                       	<title>7/6 JT 19h30</title> 
                       	<enclosure url="http://tvpodcasts.xdamman.com/downloads/rtbf/1933638.mp4" length="471337013" type="video/mpeg"/> 

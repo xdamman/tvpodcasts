@@ -11,11 +11,11 @@ var FEEDS_UPDATE_INTERVAL = 12*60; // Updating the feed every 12 minutes
 
 var server = express()
 
-var rtbf = require('./providers/rtbf')(server);
-var cplus = require('./providers/cplus')(server);
-
 server.set('port', process.env.PORT || 12441);
 server.set('base_url', "http://tvpodcasts.xdamman.com");
+
+var rtbf = require('./providers/rtbf')(server);
+var cplus = require('./providers/cplus')(server);
 
 server.use(logger({path:'logs/access.log'}));
 
@@ -55,4 +55,4 @@ server.get('/stop', function(req, res, next) {
 });
 
 server.listen(server.set('port'));
-console.info("server v"+package.version+" listening on port "+server.set('port'));
+console.info(package.name + " server v"+package.version+" listening on port "+server.set('port'));
