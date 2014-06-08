@@ -75,7 +75,7 @@ module.exports = function(server) {
         continue;
       }
 
-      var pubDate = moment(item.pubDate,"DD/MM/YYY HH:mm").format('ddd, DD MMM YYYY HH:mm:ss ZZ');
+      var pubDate = moment(item.pubDate,"DD/MM/YYYY HH:mm").format('ddd, DD MMM YYYY HH:mm:ss ZZ');
       var feeditem = '<item> \n\
                       \t<title>'+item.title+'</title> \n\
                       \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
