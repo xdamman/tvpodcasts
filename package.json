@@ -2,7 +2,7 @@
   "author": "Xavier Damman <xdamman@gmail.com>",
   "name": "tvpodcasts",
   "description": "Server to download videos from public TV websites and turn them into iTunes compatible video podcasts - perfect for your Apple TV or iPad",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "http://github.com/xdamman/tvpodcasts",
   "repository": {
     "type": "git",
