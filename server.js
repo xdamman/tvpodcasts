@@ -15,7 +15,20 @@ server.set('port', process.env.PORT || 12441);
 server.set('base_url', process.env.BASE_URL || "http://localhost:"+server.set('port'));
 
 var rtbf = require('./providers/rtbf')(server);
-var cplus = require('./providers/cplus')(server);
+var CplusProvider = require('./providers/cplus')(server);
+
+var zappingFeed = new CplusProvider({
+    feedname: "zapping"
+  , title: "ザッピング"
+  , description: "あなたのAppleTVの、iPadやiPhone上でフランスのテレビの最良と最悪の日常を見つける。"
+  , query: "zapping"
+});
+var guignolsFeed = new CplusProvider({
+    feedname: "guignols"
+  , title: "ホーン情報"
+  , description: "No description"
+  , query: "guignols"
+});
 
 server.use(logger({path:'logs/access.log'}));
 
@@ -29,7 +42,9 @@ server.status = 'idle';
 function updateFeeds() {
   if(server.status == 'idle') {
     server.status = 'updating_feed';
-    async.parallel([rtbf.updateFeed, cplus.updateFeed], function(err, results) {
+    async.parallel(
+      [rtbf.updateFeed, zappingFeed.updateFeed, guignolsFeed.updateFeed]
+    , function(err, results) {
       server.status = 'idle';
     });
   }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+                  <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+                  <channel> 
+<title>ホーン情報</title> 
+              	<language>fr-FR</language>
+              	<itunes:author>@xdamman</itunes:author>
+              	<itunes:image href="http://localhost:12441/img/guignols.jpg" />
+              	<itunes:subtitle>Video Podcast</itunes:subtitle>
+              	<description>No description</description>
+              	<itunes:category text="Society &amp; Culture"/>
+              	<link>http://localhost:12441/feeds/cplus/guignols.xml</link>
+<item> 
+                        	<title>ホーン情報 06/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1083541.mp4" length="34799978" type="video/mpeg"/> 
+                        	<pubDate>Fri, 06 Jun 2014 19:50:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/2/VIGNETTE_AUTO_541749_H.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1083541.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 05/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1082930.mp4" length="3076327" type="video/mpeg"/> 
+                        	<pubDate>Thu, 05 Jun 2014 19:50:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/2/VIGNETTE_AUTO_541538_H.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1082930.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 05/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1082946.mp4" length="4554028" type="video/mpeg"/> 
+                        	<pubDate>Thu, 05 Jun 2014 20:30:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/4/nip-nip-17120-640x360-chrss.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1082946.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 04/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1082311.mp4" length="36358605" type="video/mpeg"/> 
+                        	<pubDate>Wed, 04 Jun 2014 19:50:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/2/VIGNETTE_AUTO_541240_H.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1082311.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 04/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1082334.mp4" length="4082019" type="video/mpeg"/> 
+                        	<pubDate>Wed, 04 Jun 2014 20:49:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/4/nip-nip-16990-640x360-zvdqr.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1082334.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 04/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1082335.mp4" length="6404142" type="video/mpeg"/> 
+                        	<pubDate>Wed, 04 Jun 2014 20:50:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/42/4/nip-nip-16991-640x360-yxjlu.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1082335.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 03/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1081697.mp4" length="37310388" type="video/mpeg"/> 
+                        	<pubDate>Tue, 03 Jun 2014 19:50:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/2/VIGNETTE_AUTO_540891_H.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1081697.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 03/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1081694.mp4" length="4195805" type="video/mpeg"/> 
+                        	<pubDate>Tue, 03 Jun 2014 20:00:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/4/nip-nip-16838-640x360-slu0a.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1081694.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 03/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1081721.mp4" length="7392730" type="video/mpeg"/> 
+                        	<pubDate>Tue, 03 Jun 2014 20:53:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/1/nip-nip-16852-640x360-afe5t.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1081721.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>ホーン情報 02/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/guignols/1081058.mp4" length="41877189" type="video/mpeg"/> 
+                        	<pubDate>Mon, 02 Jun 2014 19:50:00 -0700</pubDate> 
+                        	<description>No description</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/13/2/VIGNETTE_AUTO_540628_H.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/guignols/1081058.mp4</guid> 
+                        </item>
+</channel></rss>

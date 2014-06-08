@@ -11,6 +11,12 @@
                     	<itunes:new-feed-url>http://localhost:12441/feeds/rtbfpodcast.xml</itunes:new-feed-url>
                     	<link>http://localhost:12441/feeds/rtbfpodcast.xml</link>
 <item> 
+                      	<title>8/6 JT 19h30</title> 
+                      	<enclosure url="http://localhost:12441/downloads/rtbf/1933761.mp4" length="466836887" type="video/mpeg"/> 
+                      	<pubDate>Sun, 08 Jun 2014 17:30:00 GMT</pubDate> 
+                      	<guid>http://localhost:12441/downloads/rtbf/1933761.mp4</guid> 
+                      </item>
+<item> 
                       	<title>7/6 JT 19h30</title> 
                       	<enclosure url="http://localhost:12441/downloads/rtbf/1933638.mp4" length="471337013" type="video/mpeg"/> 
                       	<pubDate>Sat, 07 Jun 2014 17:29:59 GMT</pubDate> 
@@ -33,11 +39,5 @@
                       	<enclosure url="http://localhost:12441/downloads/rtbf/1932822.mp4" length="483967282" type="video/mpeg"/> 
                       	<pubDate>Wed, 04 Jun 2014 17:29:59 GMT</pubDate> 
                       	<guid>http://localhost:12441/downloads/rtbf/1932822.mp4</guid> 
-                      </item>
-<item> 
-                      	<title>3/6 JT 19h30</title> 
-                      	<enclosure url="http://localhost:12441/downloads/rtbf/1932511.mp4" length="507216862" type="video/mpeg"/> 
-                      	<pubDate>Tue, 03 Jun 2014 17:29:58 GMT</pubDate> 
-                      	<guid>http://localhost:12441/downloads/rtbf/1932511.mp4</guid> 
                       </item>
 </channel></rss>
