@@ -75,11 +75,11 @@ module.exports = function(server) {
         continue;
       }
 
-      var pubDate = new Date(item.pubDate);
+      var pubDate = moment(item.pubDate,"DD/MM/YYY HH:mm").utc().format();
       var feeditem = '<item> \n\
                       \t<title>'+item.title+'</title> \n\
                       \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
-                      \t<pubDate>'+pubDate.toUTCString()+'</pubDate> \n\
+                      \t<pubDate>'+pubDate+'</pubDate> \n\
                       \t<description>'+item.description+'</description> \n\
                       \t<itunes:image href="'+item.thumbnail+'" /> \n\
                       \t<guid>'+server.set('base_url')+'/'+item.filepath+'</guid> \n\
