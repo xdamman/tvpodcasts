@@ -8,6 +8,7 @@
                     	<itunes:subtitle>Video Podcast</itunes:subtitle>
                     	<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>
                     	<itunes:category text="News &amp; Politics"/>
+                    	<itunes:new-feed-url>http://tvpodcasts.xdamman.com/feeds/rtbfpodcast.xml</itunes:new-feed-url>
                     	<link>http://tvpodcasts.xdamman.com/feeds/rtbfpodcast.xml</link>
 <item> 
                       	<title>7/6 JT 19h30</title> 

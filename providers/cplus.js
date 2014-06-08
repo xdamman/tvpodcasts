@@ -75,11 +75,12 @@ module.exports = function(server) {
         continue;
       }
 
-      var d = new Date(item.pubDate);
+      var pubDate = new Date(item.pubDate);
       var feeditem = '<item> \n\
                       \t<title>'+item.title+'</title> \n\
                       \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
-                      \t<pubDate>'+item.pubDate+'</pubDate> \n\
+                      \t<pubDate>'+pubDate.toUTCString()+'</pubDate> \n\
+                      \t<description>'+item.description+'</description> \n\
                       \t<guid>'+server.set('base_url')+'/'+item.filepath+'</guid> \n\
                       </item>\n';
 

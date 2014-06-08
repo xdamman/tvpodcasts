@@ -22,6 +22,7 @@ module.exports = function(server) {
                     \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
                     \t<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>\n\
                     \t<itunes:category text="News &amp; Politics"/>\n\
+                    \t<itunes:new-feed-url>'+server.set('base_url')+'/feeds/rtbfpodcast.xml</itunes:new-feed-url>\n\
                     \t<link>'+server.set('base_url')+'/feeds/rtbfpodcast.xml</link>\n';
 
   var start_time = new Date();
