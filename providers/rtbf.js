@@ -1,19 +1,6 @@
 // URL of the feed you want to parse
 var FEED_URL = "http://rss.rtbf.be/media/rss/programmes/journal_t__l__vis___19h30.xml";
 var MAX_ITEMS = 5;
-var BASE_URL = "http://rtbfpodcast.xdamman.com";
-
-var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
-                  <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
-                  <channel> \n\
-                  \t<title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title> \n\
-                  \t<language>fr-be</language>\n\
-                  \t<itunes:author>@xdamman</itunes:author>\n\
-                  \t<itunes:image href="'+BASE_URL+'/img/rtbf-19h30.jpg" />\n\
-                  \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
-                  \t<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>\n\
-                  \t<itunes:category text="News &amp; Politics"/>\n\
-                  \t<link>'+BASE_URL+'/rtbfpodcast.xml</link>\n';
 
 var sys = require('sys')
 	, FeedParser = require("feedparser")
@@ -23,8 +10,19 @@ var sys = require('sys')
   , moment = require('moment')
 	;
 
-
 module.exports = function(server) {
+
+  var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
+                    <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
+                    <channel> \n\
+                    \t<title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title> \n\
+                    \t<language>fr-be</language>\n\
+                    \t<itunes:author>@xdamman</itunes:author>\n\
+                    \t<itunes:image href="'+server.set('base_url')+'/img/rtbf-19h30.jpg" />\n\
+                    \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
+                    \t<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>\n\
+                    \t<itunes:category text="News &amp; Politics"/>\n\
+                    \t<link>'+server.set('base_url')+'/feeds/rtbfpodcast.xml</link>\n';
 
   var start_time = new Date();
 
@@ -102,7 +100,7 @@ module.exports = function(server) {
 
     for(var i=0;i<items.length;i++) {
       var item = items[i];
-      if(!item || !item.downloadUrl) {
+      if(!item || !item.filepath) {
         console.log("Invalid item: ", item);
         continue;
       }
@@ -110,9 +108,9 @@ module.exports = function(server) {
       var d = new Date(item.pubDate);
       var feeditem = '<item> \n\
                       \t<title>'+d.getDate()+'/'+(d.getMonth()+1)+' '+item.title+'</title> \n\
-                      \t<enclosure url="'+BASE_URL+item.downloadUrl+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
+                      \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
                       \t<pubDate>'+item.pubDate+'</pubDate> \n\
-                      \t<guid>'+BASE_URL+item.downloadUrl+'</guid> \n\
+                      \t<guid>'+server.set('base_url')+'/'+item.filepath+'</guid> \n\
                       </item>\n';
 
       feed += feeditem;

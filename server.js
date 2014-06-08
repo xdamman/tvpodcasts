@@ -9,27 +9,28 @@ var fs = require("fs")
 
 var FEEDS_UPDATE_INTERVAL = 12*60; // Updating the feed every 12 minutes
 
-var app = express()
+var server = express()
 
-var rtbf = require('./providers/rtbf')(app);
-var cplus = require('./providers/cplus')(app);
+var rtbf = require('./providers/rtbf')(server);
+var cplus = require('./providers/cplus')(server);
 
-app.set('port', process.env.PORT || 12441);
+server.set('port', process.env.PORT || 12441);
+server.set('base_url', "http://tvpodcasts.xdamman.com");
 
-app.use(logger({path:'logs/access.log'}));
+server.use(logger({path:'logs/access.log'}));
 
-app.use('/status', require('./lib/status'));
-app.use('/downloads',express.static("downloads/"));
-app.use('/feeds',express.static("feeds/"));
-app.use('/img',express.static("img/"));
+server.use('/status', require('./lib/status'));
+server.use('/downloads',express.static("downloads/"));
+server.use('/feeds',express.static("feeds/"));
+server.use('/img',express.static("img/"));
 
 
-app.status = 'idle';
+server.status = 'idle';
 function updateFeeds() {
-  if(app.status == 'idle') {
-    app.status = 'updating_feed';
+  if(server.status == 'idle') {
+    server.status = 'updating_feed';
     async.parallel([rtbf.updateFeed, cplus.updateFeed], function(err, results) {
-      app.status = 'idle';
+      server.status = 'idle';
     });
   }
 };
@@ -37,15 +38,15 @@ function updateFeeds() {
 updateFeeds();
 setInterval(updateFeeds, FEEDS_UPDATE_INTERVAL * 1000);
 
-app.get('/rtbfpodcast.xml', function(req, res){
+server.get('/rtbfpodcast.xml', function(req, res){
 	res.redirect('/feeds/rtbfpodcast.xml');
 });
 
-app.get('/', function(req, res) {
+server.get('/', function(req, res) {
 	res.redirect("https://github.com/xdamman/rtbfpodcast");
 });
 
-app.get('/stop', function(req, res, next) {
+server.get('/stop', function(req, res, next) {
   if(req.socket.remoteAddress == "127.0.0.1") {
     res.send("Shutting down server...\n");
     process.exit(1);
@@ -53,5 +54,5 @@ app.get('/stop', function(req, res, next) {
   else return next();
 });
 
-app.listen(app.set('port'));
-console.info("app v"+package.version+" listening on port "+app.set('port'));
+server.listen(server.set('port'));
+console.info("server v"+package.version+" listening on port "+server.set('port'));

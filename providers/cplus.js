@@ -7,25 +7,24 @@ var request = require('request')
   , utils = require('../lib/utils')
   ;
 
-
-var BASE_URL = "http://localhost:8080";
-var MAX_ITEMS = 5;
+var LOGS_FILE = "./logs/avconv.log";
+var MAX_ITEMS = 10;
 
 var query = "http://service.canal-plus.com/video/rest/search/cplus/zapping?format=json";
 
-var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
-                  <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
-                  <channel> \n\
-                  \t<title>Le Zapping - Canal Plus (France)</title> \n\
-                  \t<language>fr-FR</language>\n\
-                  \t<itunes:author>@xdamman</itunes:author>\n\
-                  \t<itunes:image href="'+BASE_URL+'/img/zapping.jpg" />\n\
-                  \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
-                  \t<description>Retrouvez tous les jours le meilleur et le pire de la television francaise sur votre AppleTV, iPad ou iPhone.</description>\n\
-                  \t<itunes:category text="News &amp; Politics"/>\n\
-                  \t<link>'+BASE_URL+'/zapping.xml</link>\n';
-
 module.exports = function(server) {
+
+  var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
+                    <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
+                    <channel> \n\
+                    \t<title>Le Zapping - Canal Plus (France)</title> \n\
+                    \t<language>fr-FR</language>\n\
+                    \t<itunes:author>@xdamman</itunes:author>\n\
+                    \t<itunes:image href="'+server.set('base_url')+'/img/zapping.jpg" />\n\
+                    \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
+                    \t<description>Retrouvez tous les jours le meilleur et le pire de la television francaise sur votre AppleTV, iPad ou iPhone.</description>\n\
+                    \t<itunes:category text="News &amp; Politics"/>\n\
+                    \t<link>'+server.set('base_url')+'/feeds/zapping.xml</link>\n';
 
   var updateFeed = function(cb) {
 
@@ -56,7 +55,7 @@ module.exports = function(server) {
         items.push(info);
       });
 
-      async.forEach(items, download, function(err, results) {
+      async.forEachLimit(items, 2, download, function(err, results) {
         console.log(items.length+ " videos downloaded");
         generateFeed(items, cb);
       });
@@ -79,9 +78,9 @@ module.exports = function(server) {
       var d = new Date(item.pubDate);
       var feeditem = '<item> \n\
                       \t<title>'+item.title+'</title> \n\
-                      \t<enclosure url="'+BASE_URL+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
+                      \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
                       \t<pubDate>'+item.pubDate+'</pubDate> \n\
-                      \t<guid>'+BASE_URL+'/'+item.filepath+'</guid> \n\
+                      \t<guid>'+server.set('base_url')+'/'+item.filepath+'</guid> \n\
                       </item>\n';
 
       feed += feeditem;
@@ -106,15 +105,16 @@ module.exports = function(server) {
     }
 
     item.video = item.video.replace('/master.m3u8','/index_3_av.m3u8');
-    console.log("Downloading "+item.video);
+    console.log("Downloading "+item.video+" to "+item.filepath);
 
 
     var start_time = new Date;
 
     var avconv = spawn('avconv',['-i',item.video,item.filepath]);
 
-    // avconv.stdout.pipe(process.stdout);
-    // avconv.stderr.pipe(process.stderr);
+    var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
+    avconv.stdout.pipe(logs);
+    avconv.stderr.pipe(logs);
 
     avconv.on('exit', function(code) {
       if(code != 0) {
@@ -123,7 +123,7 @@ module.exports = function(server) {
         return cb(new Error(err));
       } 
       var duration = (new Date) - start_time;
-      console.log(item.video+" downloaded successfully in "+moment.duration(duration).humanize());
+      console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
       item.filesize = fs.statSync(item.filepath).size;
       utils.cleanDownloads('cplus/');
       return cb(null, item);
