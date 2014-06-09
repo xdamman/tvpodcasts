@@ -94,7 +94,7 @@ module.exports = function(server) {
 
       for(var i=0;i<items.length;i++) {
         var item = items[i];
-        if(!item || !item.filepath) {
+        if(!(item && item.filepath && item.filesize)) {
           console.log("Invalid item: ", item);
           continue;
         }
