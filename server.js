@@ -55,7 +55,7 @@ updateFeeds();
 setInterval(updateFeeds, FEEDS_UPDATE_INTERVAL * 1000);
 
 server.get('/rtbfpodcast.xml', function(req, res){
-	res.redirect('/feeds/rtbfpodcast.xml');
+	res.sendfile('feeds/rtbfpodcast.xml');
 });
 
 server.get('/', function(req, res) {
