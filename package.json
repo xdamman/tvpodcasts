@@ -24,7 +24,8 @@
     "express-logger": "0.0.3",
     "humanize": "0.0.9",
     "underscore": "^1.6.0",
-    "moment": "^2.6.0"
+    "moment": "^2.6.0",
+    "nodalytics": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^1.9.1",

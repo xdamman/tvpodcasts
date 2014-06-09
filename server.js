@@ -5,6 +5,7 @@ var fs = require("fs")
   , humanize = require('humanize')
   , package = require('./package.json')
   , async = require('async')
+  , nodalytics = require('nodalytics')
   ;
 
 var FEEDS_UPDATE_INTERVAL = 12*60; // Updating the feed every 12 minutes
@@ -32,6 +33,7 @@ var guignolsFeed = new CplusProvider({
 });
 
 server.use(logger({path:'logs/access.log'}));
+server.use(nodalytics('UA-45923462-3'));
 
 server.use('/status', require('./lib/status'));
 server.use('/downloads',express.static("downloads/"));
