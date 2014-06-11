@@ -21,15 +21,23 @@ var CplusProvider = require('./providers/cplus')(server);
 var zappingFeed = new CplusProvider({
     feedname: "zapping"
   , title: "ザッピング"
-  , description: "あなたのAppleTVの、iPadやiPhone上でフランスのテレビの最良と最悪の日常を見つける。"
-  , query: "zapping"
+  , description: "No description"
+  , website: 'http://www.canalplus.fr/c-infos-documentaires/pid1830-c-zapping.html'
 });
 var guignolsFeed = new CplusProvider({
     feedname: "guignols"
   , title: "ホーン情報"
   , description: "No description"
-  , query: "guignols"
+  , website: 'http://www.canalplus.fr/c-divertissement/pid1784-c-les-guignols.html'
   , filter: function(item) { return item.RUBRIQUAGE.CATEGORIE.match(/SEMAINE|QUOTIDIEN/); }
+});
+
+var petitjournalFeed = new CplusProvider({
+    feedname: "petitjournal"
+  , title: "小さな新聞"
+  , description: "No description"
+  , website: 'http://www.canalplus.fr/c-divertissement/c-le-petit-journal/pid6515-l-emission.html'
+  , max_items: 3
 });
 
 server.use(logger({path:'logs/access.log'}));
@@ -46,7 +54,7 @@ function updateFeeds() {
   if(server.status == 'idle') {
     server.status = 'updating_feed';
     async.parallel(
-      [rtbf.updateFeed, zappingFeed.updateFeed, guignolsFeed.updateFeed]
+      [rtbf.updateFeed, zappingFeed.updateFeed, guignolsFeed.updateFeed, petitjournalFeed.updateFeed]
     , function(err, results) {
       server.status = 'idle';
     });

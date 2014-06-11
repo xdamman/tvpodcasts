@@ -10,7 +10,7 @@
   },
   "scripts": {
     "stop": "curl localhost/stop",
-    "test": "./node_modules/mocha/bin/mocha test/"
+    "test": "./node_modules/mocha/bin/mocha -r test/index.js  test/"
   },
   "main": "./",
   "engines": {

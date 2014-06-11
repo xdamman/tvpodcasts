@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+                  <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+                  <channel> 
+<title>ザッピング</title> 
+              	<language>fr-FR</language>
+              	<itunes:author>@xdamman</itunes:author>
+              	<itunes:image href="http://localhost:12441/img/petitjournal.jpg" />
+              	<itunes:subtitle>Video Podcast</itunes:subtitle>
+              	<description>あなたのAppleTVの、iPadやiPhone上でフランスのテレビの最良と最悪の日常を見つける。</description>
+              	<itunes:category text="Society &amp; Culture"/>
+              	<link>http://localhost:12441/feeds/cplus/petitjournal.xml</link>
+<item> 
+                        	<title>LA_REVUE_DE_PRESSE_DE_CATHERINE_ET_ELIANE 10/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/petitjournal/1085424.mp4" length="860288" type="video/mpeg"/> 
+                        	<pubDate>Tue, 10 Jun 2014 21:10:00 -0700</pubDate> 
+                        	<description>あなたのAppleTVの、iPadやiPhone上でフランスのテレビの最良と最悪の日常を見つける。</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/12/6/nip-nip-17569-640x360-dljlc.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/petitjournal/1085424.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>BONUS 10/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/petitjournal/1085423.mp4" length="564311" type="video/mpeg"/> 
+                        	<pubDate>Tue, 10 Jun 2014 21:10:00 -0700</pubDate> 
+                        	<description>あなたのAppleTVの、iPadやiPhone上でフランスのテレビの最良と最悪の日常を見つける。</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/12/1/nip-nip-17568-640x360-dznnq.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/petitjournal/1085423.mp4</guid> 
+                        </item>
+<item> 
+                        	<title>LA_MINUTE_POP 10/06/2014</title> 
+                        	<enclosure url="http://localhost:12441/downloads/cplus/petitjournal/1085428.mp4" length="1582995" type="video/mpeg"/> 
+                        	<pubDate>Tue, 10 Jun 2014 21:12:00 -0700</pubDate> 
+                        	<description>あなたのAppleTVの、iPadやiPhone上でフランスのテレビの最良と最悪の日常を見つける。</description> 
+                        	<itunes:image href="http://media.canal-plus.com/wwwplus/image/4/12/10/nip-nip-17571-640x360-nnfwm.jpg" /> 
+                        	<guid>http://localhost:12441/downloads/cplus/petitjournal/1085428.mp4</guid> 
+                        </item>
+</channel></rss>

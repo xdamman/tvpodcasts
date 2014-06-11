@@ -29,52 +29,94 @@ module.exports = function(server) {
       , description: options.description
       , category: options.category || "Society &amp; Culture" || "News &amp; Politics"
       , cover: options.cover || server.set('base_url')+'/img/'+options.feedname+'.jpg'
+      , website: options.website
+      , max_items: options.max_items || MAX_ITEMS
       , filter: (typeof options.filter == 'function') ? options.filter : function(item) { return true; }
     };
 
-    this.updateFeed = function(cb) {
+    this.init = (function() {
+      if(!fs.existsSync(DOWNLOADS_DIR + 'cplus')) {
+        fs.mkdirSync(DOWNLOADS_DIR + 'cplus');
+      }
 
       if(!fs.existsSync(DOWNLOADS_DIR + 'cplus/' + self.feed.name)) {
         fs.mkdirSync(DOWNLOADS_DIR + 'cplus/' + self.feed.name);
       }
+    })();
 
-      var queryurl = "http://service.canal-plus.com/video/rest/search/cplus/"+encodeURIComponent(self.feed.query)+"?format=json";
+    this.getLastVideoId = function(cb) {
 
-      request(queryurl, {json: true}, function(err, res, body) {
+      var stream = request(self.feed.website);
+      var videoId;
+      stream.on('data', function(data) {
+        var html = data.toString();
+        if(!/videoId="([0-9]{6,12})"/.test(html)) return;
+        var matches = html.match(/videoId="([0-9]{6,12})"/i);
+        cb(null, parseInt(matches[1], 10));
+        stream.destroy();
+      });
 
-        var i = 0
-          , items = [];
+      stream.on('error', cb);
+      stream.on('response', function(res) {
+        if(res.statusCode != 200) return this.emit('error', new Error("Invalid response code "+res.statusCode));
+      });
 
-        _.forEach(body, function(item) {
+    };
 
-          if(!item.INFOS.PUBLICATION) {
-            console.error("Invalid item -- missing date", item);
-            return;
-          }
+    this.getLastItems = function(cb) {
 
-          if(!self.feed.filter(item)) {
-            return;
-          }
+      self.getLastVideoId(function(err, id) {
 
-          if(i++ >= MAX_ITEMS) return;
+        if(!id) return cb(new Error("Invalid videoId"));
 
-          var info = {
-              id: item.ID
-            , title: self.feed.title+" "+ item.INFOS.PUBLICATION.DATE // item.INFOS.TITRAGE.SOUS_TITRE
-            , description: item.RUBRIQUAGE.CATEGORIE + " " + (self.feed.description || item.INFOS.DESCRIPTION)
-            , thumbnail: item.MEDIA.IMAGES.GRAND
-            , video: item.MEDIA.VIDEOS.HLS
-            , pubDate: item.INFOS.PUBLICATION.DATE+" "+item.INFOS.PUBLICATION.HEURE
-          };
+        var queryurl = "http://service.canal-plus.com/video/rest/getVideosLiees/cplus/"+id+"?format=json";
 
-          items.push(info);
+        request(queryurl, {json: true}, function(err, res, body) {
+
+          if(err) return cb(err);
+
+          var i = 0
+            , items = [];
+
+          _.forEach(body, function(item) {
+
+            if(!(item && item.INFOS && item.INFOS.PUBLICATION)) {
+              console.error("Invalid item -- missing date", item);
+              return;
+            }
+
+            if(!self.feed.filter(item)) {
+              return;
+            }
+
+            if(i++ >= self.feed.max_items) return;
+
+            var info = {
+                id: item.ID
+              , title: item.RUBRIQUAGE.CATEGORIE + " " + item.INFOS.PUBLICATION.DATE // item.INFOS.TITRAGE.SOUS_TITRE
+              , description: self.feed.description || item.INFOS.DESCRIPTION
+              , thumbnail: item.MEDIA.IMAGES.GRAND
+              , video: item.MEDIA.VIDEOS.HLS
+              , pubDate: item.INFOS.PUBLICATION.DATE+" "+item.INFOS.PUBLICATION.HEURE
+            };
+
+            items.push(info);
+          });
+
+          cb(null, items);
+
         });
+      });
+    },
 
+    this.updateFeed = function(cb) {
+
+      self.getLastItems(function(err, items) { 
         async.forEachLimit(items, 2, download, function(err, results) {
+          if(err) return cb(err);
           console.log(items.length+ " videos downloaded");
           generateFeed(items, cb);
         });
-
       });
 
     };
@@ -151,7 +193,7 @@ module.exports = function(server) {
         var duration = (new Date) - start_time;
         console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
         item.filesize = fs.statSync(item.filepath).size;
-        utils.cleanDownloads('cplus/'+self.feed.name+'/', MAX_ITEMS);
+        utils.cleanDownloads('cplus/'+self.feed.name+'/', self.feed.max_items);
         return cb(null, item);
       });
 

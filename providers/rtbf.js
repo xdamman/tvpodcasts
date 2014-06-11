@@ -1,8 +1,10 @@
 // URL of the feed you want to parse
 var FEED_URL = "http://rss.rtbf.be/media/rss/programmes/journal_t__l__vis___19h30.xml";
-var MAX_ITEMS = 5;
+var MAX_ITEMS = 3;
+var DOWNLOADS_DIR = "downloads/";
 
 var sys = require('sys')
+  , fs = require('fs')
 	, FeedParser = require("feedparser")
 	, async = require('async')
   , utils = require('../lib/utils')
@@ -26,6 +28,10 @@ module.exports = function(server) {
                     \t<link>'+server.set('base_url')+'/feeds/rtbfpodcast.xml</link>\n';
 
   var start_time = new Date();
+
+  if(!fs.existsSync(DOWNLOADS_DIR + 'rtbf')) {
+    fs.mkdirSync(DOWNLOADS_DIR + 'rtbf');
+  }
 
   var updateFeed = function(cb) {
 

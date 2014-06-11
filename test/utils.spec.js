@@ -2,19 +2,13 @@ var fs = require('fs');
 var utils = require('../lib/utils');
 
 var DOWNLOADS_DIR = "downloads/";
-var url = "https://d262ilb51hltx0.cloudfront.net/max/563/1*-uuCRCgbnGxovqngJRpa3A.png";
-
-before(function() {
-  
-  
-
-});
+var url = "https://www.google.com/images/srpr/logo11w.png";
 
 describe('utils', function() {
 
   it('makes sure the downloads directory is empty', function(done) {
-    utils.cleanDownloads(0, function() {
-      var files = fs.readdirSync(DOWNLOADS_DIR);
+    utils.cleanDownloads('test/', 0, function(err) {
+      var files = fs.readdirSync(DOWNLOADS_DIR+'test/');
       setTimeout(function() {
         expect(files.length).to.equal(0);
         done();
@@ -24,21 +18,10 @@ describe('utils', function() {
 
   it('downloads a file', function(done) {
 
-    utils.downloadUrl({url: url}, function(err, item) {
+    var filepath = DOWNLOADS_DIR+'test/'+'testimagefile.png';
+    utils.downloadUrl(url, filepath, function(err, filepath) {
       expect(err).to.not.exist;
-      expect(item.filelength).to.equal(449662);
-      expect(item.cache).to.equal(false);
-      done();
-    });
-
-  });
-
-  it('downloads file from cache', function(done) {
-
-    utils.downloadUrl({url: url}, function(err, item) {
-      expect(err).to.not.exist;
-      expect(item.filelength).to.equal(449662);
-      expect(item.cache).to.equal(true);
+      expect(fs.statSync(filepath).size).to.equal(14022);
       done();
     });
 
