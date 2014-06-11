@@ -4,12 +4,15 @@ var request = require('request')
   , _ = require('underscore')
   , moment = require('moment')
   , spawn = require('child_process').spawn
+  , exec = require('child_process').exec
   , utils = require('../lib/utils')
+  , humanize = require('humanize')
   ;
 
 var LOGS_FILE = "./logs/avconv.log";
 var MAX_ITEMS = 10;
 var DOWNLOADS_DIR = "downloads/"; 
+var TMP_DIR = "/tmp/"; 
 
 var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
                   <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
@@ -179,6 +182,7 @@ module.exports = function(settings) {
     var download = function(item, cb) {
 
       item.filepath = DOWNLOADS_DIR+"cplus/"+self.feed.name+"/"+item.id+'.mp4';
+      item.tmpfilepath = TMP_DIR+self.feed.name+"-"+item.id+'.mp4';
 
       if(fs.existsSync(item.filepath)) {
         // console.log("Getting "+item.filepath+" from cache");
@@ -190,11 +194,11 @@ module.exports = function(settings) {
         if(err) return cb(err);
 
         item.video = streamurl;
-        console.log("Downloading "+item.video+" to "+item.filepath);
+        console.log(humanize.date("Y-m-d H:i:s")+" Downloading "+item.video+" to "+item.tmpfilepath);
 
         var start_time = new Date;
 
-        var avconv = spawn('avconv',['-i',item.video,item.filepath]);
+        var avconv = spawn('avconv',['-i',item.video,item.tmpfilepath]);
 
         var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
         avconv.stdout.pipe(logs);
@@ -206,11 +210,14 @@ module.exports = function(settings) {
             console.error(err);
             return cb(new Error(err));
           } 
-          var duration = (new Date) - start_time;
-          console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
-          item.filesize = fs.statSync(item.filepath).size;
-          utils.cleanDownloads('cplus/'+self.feed.name+'/', self.feed.max_items);
-          return cb(null, item);
+          console.log(humanize.date("Y-m-d H:i:s")+" Moving "+item.tmpfilepath+" to "+item.filepath);
+          exec("mv "+item.tmpfilepath+" "+item.filepath, function(err, stdout, stderr) {
+            var duration = (new Date) - start_time;
+            console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
+            item.filesize = fs.statSync(item.filepath).size;
+            utils.cleanDownloads('cplus/'+self.feed.name+'/', self.feed.max_items);
+            return cb(null, item);
+          });
         });
       });
     };

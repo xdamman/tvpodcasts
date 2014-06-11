@@ -37,7 +37,7 @@ server.use('/downloads',express.static("downloads/"));
 server.use('/feeds',express.static("feeds/"));
 server.use('/img',express.static("img/"));
 
-server.status = {};
+server.feeds = {};
 
 /*
  * forking update feed
@@ -49,30 +49,35 @@ function updateFeed(feedname, cb) {
     return cb(null);
   }
 
-  server.status[feedname] = server.status[feedname] || {};
+  server.feeds[feedname] = server.feeds[feedname] || {};
 
-  if(server.status[feedname].status == 'updating_feed') {
+  if(server.feeds[feedname].status == 'updating_feed') {
     console.log(feedname+" still running -- skipping execution");
     return cb(null);
   }
 
   var cmd = "./bin/update_feed "+feedname+" 1>>logs/"+feedname+".out.log 2>>logs/"+feedname+".err.log";
   console.log(humanize.date("Y-m-d H:i:s")+" - "+"forking update_feed "+feedname); 
-  server.status[feedname].status = 'updating_feed'; 
+  server.feeds[feedname].status = 'updating_feed'; 
 
-  server.status[feedname].last_run = new Date;
+  server.feeds[feedname].last_run = new Date;
   exec(cmd, function(err, stdout, stderr) {
     if(err) console.error("Unable to update "+feedname+" feed -- see logs/"+feedname+".err.log for details", err);
-    server.status[feedname].status = 'idle'; 
+    server.feeds[feedname].status = 'idle'; 
     return cb(null, stdout);
   });
 }
 
 function updateFeeds() {
+  server.status = "updating_feeds";
+  server.emit('busy');
   async.forEach(program.feeds, updateFeed, function(err, results) {
     if(err) {
       console.error("Error in updating the feeds: ", err);
     }
+    server.status = "idle";
+    server.emit('idle');
+
     console.log("All feeds executed successfully");
   });
 };
@@ -95,10 +100,20 @@ server.get('/robots.txt', function(req, res) {
   res.sendfile('robots.txt');
 });
 
+safeShutdown = function() {
+  if(server.status != 'idle') {
+    server.once('idle', safeShutdown);
+    return "Server is busy. Safe shutdown scheduled\n";
+  }
+  else {
+    setTimeout(function() { process.exit(1) }, 1000);
+    return "Shutting down server in a second...\n";
+  }
+};
+
 server.get('/stop', function(req, res, next) {
   if(req.socket.remoteAddress == "127.0.0.1") {
-    res.send("Shutting down server...\n");
-    process.exit(1);
+    return res.send(safeShutdown());
   }
   else return next();
 });
