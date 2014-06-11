@@ -48,7 +48,6 @@ feeds['petitjournal'] = new CplusProvider({
   , max_items: 10
 });
 
-
 if(!program.feedname) {
   console.error("Please specify a feed to update. Possible values are ",Object.keys(feeds));
   process.exit(1);
