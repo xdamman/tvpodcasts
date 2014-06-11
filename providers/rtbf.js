@@ -12,7 +12,7 @@ var sys = require('sys')
   , moment = require('moment')
 	;
 
-module.exports = function(server) {
+module.exports = function(settings) {
 
   var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
                     <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
@@ -20,12 +20,12 @@ module.exports = function(server) {
                     \t<title>Journal 19h30 de la RTBF Video Podcast (Belgique)</title> \n\
                     \t<language>fr-be</language>\n\
                     \t<itunes:author>@xdamman</itunes:author>\n\
-                    \t<itunes:image href="'+server.set('base_url')+'/img/rtbf-19h30.jpg" />\n\
+                    \t<itunes:image href="'+settings.base_url+'/img/rtbf-19h30.jpg" />\n\
                     \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
                     \t<description>Retrouvez tous les jours le journal de 19h30 de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>\n\
                     \t<itunes:category text="News &amp; Politics"/>\n\
-                    \t<itunes:new-feed-url>'+server.set('base_url')+'/feeds/rtbfpodcast.xml</itunes:new-feed-url>\n\
-                    \t<link>'+server.set('base_url')+'/feeds/rtbfpodcast.xml</link>\n';
+                    \t<itunes:new-feed-url>'+settings.base_url+'/feeds/rtbfpodcast.xml</itunes:new-feed-url>\n\
+                    \t<link>'+settings.base_url+'/feeds/rtbfpodcast.xml</link>\n';
 
   var start_time = new Date();
 
@@ -115,9 +115,9 @@ module.exports = function(server) {
       var d = new Date(item.pubDate);
       var feeditem = '<item> \n\
                       \t<title>'+d.getDate()+'/'+(d.getMonth()+1)+' '+item.title+'</title> \n\
-                      \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
+                      \t<enclosure url="'+settings.base_url+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
                       \t<pubDate>'+item.pubDate+'</pubDate> \n\
-                      \t<guid>'+server.set('base_url')+'/'+item.filepath+'</guid> \n\
+                      \t<guid>'+settings.base_url+'/'+item.filepath+'</guid> \n\
                       </item>\n';
 
       feed += feeditem;

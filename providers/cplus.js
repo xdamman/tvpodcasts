@@ -16,7 +16,7 @@ var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
                   <channel> \n';
 
 
-module.exports = function(server) {
+module.exports = function(settings) {
 
   return function(options) {
 
@@ -28,7 +28,7 @@ module.exports = function(server) {
       , title: options.title
       , description: options.description
       , category: options.category || "Society &amp; Culture" || "News &amp; Politics"
-      , cover: options.cover || server.set('base_url')+'/img/'+options.feedname+'.jpg'
+      , cover: options.cover || settings.base_url+'/img/'+options.feedname+'.jpg'
       , website: options.website
       , max_items: options.max_items || MAX_ITEMS
       , filter: (typeof options.filter == 'function') ? options.filter : function(item) { return true; }
@@ -43,6 +43,21 @@ module.exports = function(server) {
         fs.mkdirSync(DOWNLOADS_DIR + 'cplus/' + self.feed.name);
       }
     })();
+
+    this.getBestStream = function(m3u8, cb) {
+
+      request(m3u8, function(err, res, body) {
+        if(err) return cb(err);
+        var lines = body.split('\n');
+        var streamurl;
+        for(var i=0;i<lines.length;i++) {
+          if(lines[i].substr(0,4)=='http') streamurl = lines[i];
+        }
+        if(!streamurl) return cb(new Error("Invalid m3u8: "+m3ua));
+        return cb(null, streamurl);
+      });
+
+    };
 
     this.getLastVideoId = function(cb) {
 
@@ -114,7 +129,6 @@ module.exports = function(server) {
       self.getLastItems(function(err, items) { 
         async.forEachLimit(items, 2, download, function(err, results) {
           if(err) return cb(err);
-          console.log(items.length+ " videos downloaded");
           generateFeed(items, cb);
         });
       });
@@ -132,7 +146,7 @@ module.exports = function(server) {
               \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
               \t<description>'+self.feed.description+'</description>\n\
               \t<itunes:category text="'+self.feed.category+'"/>\n\
-              \t<link>'+server.set('base_url')+'/feeds/cplus/'+self.feed.name+'.xml</link>\n';
+              \t<link>'+settings.base_url+'/feeds/cplus/'+self.feed.name+'.xml</link>\n';
 
       for(var i=0;i<items.length;i++) {
         var item = items[i];
@@ -144,11 +158,11 @@ module.exports = function(server) {
         var pubDate = moment(item.pubDate,"DD/MM/YYYY HH:mm").format('ddd, DD MMM YYYY HH:mm:ss ZZ');
         var feeditem = '<item> \n\
                         \t<title>'+item.title+'</title> \n\
-                        \t<enclosure url="'+server.set('base_url')+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
+                        \t<enclosure url="'+settings.base_url+'/'+item.filepath+'" length="'+item.filesize+'" type="video/mpeg"/> \n\
                         \t<pubDate>'+pubDate+'</pubDate> \n\
                         \t<description>'+item.description+'</description> \n\
                         \t<itunes:image href="'+item.thumbnail+'" /> \n\
-                        \t<guid>'+server.set('base_url')+'/'+item.filepath+'</guid> \n\
+                        \t<guid>'+settings.base_url+'/'+item.filepath+'</guid> \n\
                         </item>\n';
 
         xml += feeditem;
@@ -167,38 +181,38 @@ module.exports = function(server) {
       item.filepath = DOWNLOADS_DIR+"cplus/"+self.feed.name+"/"+item.id+'.mp4';
 
       if(fs.existsSync(item.filepath)) {
-        console.log("Getting "+item.filepath+" from cache");
+        // console.log("Getting "+item.filepath+" from cache");
         item.filesize = fs.statSync(item.filepath).size;
         return cb(null, item);
       }
 
-      item.video = item.video.replace('/master.m3u8','/index_3_av.m3u8');
-      console.log("Downloading "+item.video+" to "+item.filepath);
+      self.getBestStream(item.video, function(err, streamurl) {
+        if(err) return cb(err);
 
+        item.video = streamurl;
+        console.log("Downloading "+item.video+" to "+item.filepath);
 
-      var start_time = new Date;
+        var start_time = new Date;
 
-      var avconv = spawn('avconv',['-i',item.video,item.filepath]);
+        var avconv = spawn('avconv',['-i',item.video,item.filepath]);
 
-      var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
-      avconv.stdout.pipe(logs);
-      avconv.stderr.pipe(logs);
+        var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
+        avconv.stdout.pipe(logs);
+        avconv.stderr.pipe(logs);
 
-      avconv.on('exit', function(code) {
-        if(code != 0) {
-          var err = "Error downloading "+item.video;
-          console.error(err);
-          return cb(new Error(err));
-        } 
-        var duration = (new Date) - start_time;
-        console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
-        item.filesize = fs.statSync(item.filepath).size;
-        utils.cleanDownloads('cplus/'+self.feed.name+'/', self.feed.max_items);
-        return cb(null, item);
+        avconv.on('exit', function(code) {
+          if(code != 0) {
+            var err = "Error downloading "+item.video;
+            console.error(err);
+            return cb(new Error(err));
+          } 
+          var duration = (new Date) - start_time;
+          console.log(item.filepath+" downloaded successfully in "+moment.duration(duration).humanize());
+          item.filesize = fs.statSync(item.filepath).size;
+          utils.cleanDownloads('cplus/'+self.feed.name+'/', self.feed.max_items);
+          return cb(null, item);
+        });
       });
-
     };
-    
   }
-
 };

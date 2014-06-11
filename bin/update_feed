@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , package = require('../package.json')
+  , humanize = require('humanize')
+  , async = require('async')
+  ;
+
+program
+  .version(package.version)
+  .usage('<feedname>','[all | zapping | petitjournal | guignols | rtbfpodcast] - E.g. zapping') 
+  .option('-b, --baseurl <string>', 'server base url. Default: process.env.BASE_URL || "http://localhost:12441"')
+  .parse(process.argv);
+
+program.feedname = process.argv[2];
+
+var port = process.env.PORT || 12441;
+var settings = { base_url: program.baseurl || process.env.BASE_URL || "http://localhost:"+port };
+
+var CplusProvider = require('../providers/cplus')(settings);
+
+var feeds = {};
+
+feeds['rtbfpodcast'] = require('../providers/rtbf')(settings);
+
+feeds['zapping'] = new CplusProvider({
+    feedname: "zapping"
+  , title: "ザッピング"
+  , description: "No description"
+  , website: 'http://www.canalplus.fr/c-infos-documentaires/pid1830-c-zapping.html'
+});
+
+feeds['guignols']  = new CplusProvider({
+    feedname: "guignols"
+  , title: "ホーン情報"
+  , description: "No description"
+  , website: 'http://www.canalplus.fr/c-divertissement/pid1784-c-les-guignols.html'
+  , filter: function(item) { return item.RUBRIQUAGE.CATEGORIE.match(/SEMAINE|QUOTIDIEN/); }
+});
+
+feeds['petitjournal'] = new CplusProvider({
+    feedname: "petitjournal"
+  , title: "小さな新聞"
+  , description: "No description"
+  , website: 'http://www.canalplus.fr/c-divertissement/c-le-petit-journal/pid6515-l-emission.html'
+  , max_items: 3
+});
+
+
+if(!program.feedname) {
+  console.error("Please specify a feed to update. Possible values are ",Object.keys(feeds));
+  process.exit(1);
+}
+
+if(!feeds[program.feedname]) {
+  console.error(program.feedname + " is not defined");
+  process.exit(1);
+}
+
+console.log(humanize.date("Y-m-d H:i:s") + " Updating " + program.feedname);
+feeds[program.feedname].updateFeed(function(err, res) {
+
+  if(err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  console.log(humanize.date("Y-m-d H:i:s") + " " + program.feedname + " updated successfully");
+  process.exit(0);
+
+});

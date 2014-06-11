@@ -32,6 +32,19 @@ describe("cplus", function() {
 
   });
 
+  it("Get best stream from m3u8", function(done) {
+
+    var m3u8 = "http://us-cplus-aka.canal-plus.com/i/1405/LES_GUIGNOLS_QUOTIDIEN_140529_AUTO_24681_169_video_,L,H,HD,.mp4.csmil/master.m3u8";
+
+    zappingFeed.getBestStream(m3u8, function(err, streamurl) {
+      expect(err).to.not.exist;
+      expect(streamurl).to.equal("http://us-cplus-aka.canal-plus.com/i/1405/LES_GUIGNOLS_QUOTIDIEN_140529_AUTO_24681_169_video_,L,H,HD,.mp4.csmil/index_2_av.m3u8");
+      done();
+
+    });
+
+  });
+
   it("Get latest items", function(done) {
 
     var requiredAttributes = ['title','description','pubDate','thumbnail','video'];
