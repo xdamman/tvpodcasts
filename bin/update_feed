@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var TIMEOUT = 40; // in minutes
+
 var program = require('commander')
   , package = require('../package.json')
   , humanize = require('humanize')
@@ -43,7 +45,7 @@ feeds['petitjournal'] = new CplusProvider({
   , title: "小さな新聞"
   , description: "No description"
   , website: 'http://www.canalplus.fr/c-divertissement/c-le-petit-journal/pid6515-l-emission.html'
-  , max_items: 3
+  , max_items: 10
 });
 
 
@@ -59,13 +61,15 @@ if(!feeds[program.feedname]) {
 
 console.log(humanize.date("Y-m-d H:i:s") + " Updating " + program.feedname);
 feeds[program.feedname].updateFeed(function(err, res) {
-
   if(err) {
     console.error(err);
     process.exit(1);
   }
-
   console.log(humanize.date("Y-m-d H:i:s") + " " + program.feedname + " updated successfully");
   process.exit(0);
-
 });
+
+setTimeout(function() {
+  console.error(humanize.date("Y-m-d H:i:s")+ " timeout after "+TIMEOUT+"mn, exiting");
+  process.exit(1);
+}, 1000*60*TIMEOUT);
