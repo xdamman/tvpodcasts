@@ -198,7 +198,7 @@ module.exports = function(settings) {
 
         var start_time = new Date;
 
-        var avconv = spawn('avconv',['-i',item.video,item.tmpfilepath]);
+        var avconv = spawn('avconv',['-y','-i',item.video,item.tmpfilepath]);
 
         var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
         avconv.stdout.pipe(logs);
