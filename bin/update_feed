@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var TIMEOUT = 40; // in minutes
+var TIMEOUT = 60; // in minutes
 
 var program = require('commander')
   , package = require('../package.json')
