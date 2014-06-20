@@ -40,6 +40,7 @@ feeds['guignols']  = new CplusProvider({
   , filter: function(item) { return item.RUBRIQUAGE.CATEGORIE.match(/SEMAINE|QUOTIDIEN/); }
 });
 
+/*
 feeds['petitjournal'] = new CplusProvider({
     feedname: "petitjournal"
   , title: "小さな新聞"
@@ -47,6 +48,7 @@ feeds['petitjournal'] = new CplusProvider({
   , website: 'http://www.canalplus.fr/c-divertissement/c-le-petit-journal/pid6515-l-emission.html'
   , max_items: 10
 });
+*/
 
 if(!program.feedname) {
   console.error("Please specify a feed to update. Possible values are ",Object.keys(feeds));

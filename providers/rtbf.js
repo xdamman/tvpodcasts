@@ -1,6 +1,6 @@
 // URL of the feed you want to parse
 var FEED_URL = "http://rss.rtbf.be/media/rss/programmes/journal_t__l__vis___19h30.xml";
-var MAX_ITEMS = 3;
+var MAX_ITEMS = 2;
 var DOWNLOADS_DIR = "downloads/";
 
 var sys = require('sys')
