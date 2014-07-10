@@ -9,7 +9,7 @@ var request = require('request')
   , humanize = require('humanize')
   ;
 
-var LOGS_FILE = "./logs/avconv.log";
+var LOGS_FILE = "./logs/ffmpeg.log";
 var MAX_ITEMS = 10;
 var DOWNLOADS_DIR = "downloads/"; 
 var TMP_DIR = "/tmp/"; 
@@ -198,13 +198,13 @@ module.exports = function(settings) {
 
         var start_time = new Date;
 
-        var avconv = spawn('avconv',['-y','-i',item.video,item.tmpfilepath]);
+        var ffmpeg = spawn('ffmpeg',['-y','-i',item.video,item.tmpfilepath]);
 
         var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
-        avconv.stdout.pipe(logs);
-        avconv.stderr.pipe(logs);
+        ffmpeg.stdout.pipe(logs);
+        ffmpeg.stderr.pipe(logs);
 
-        avconv.on('exit', function(code) {
+        ffmpeg.on('exit', function(code) {
           if(code != 0) {
             var err = "Error downloading "+item.video;
             console.error(err);

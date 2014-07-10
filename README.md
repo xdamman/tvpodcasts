@@ -9,7 +9,7 @@ This nodejs server downloads videos from public websites of TV channels and turn
 
 ## How to run it locally?
 
-The show "Zapping" requires `avconv`. Please make sure that you have installed it first on your machine. On a mac: `brew install libav`, on Ubuntu please [follow these instructions](https://gist.github.com/faleev/3435377).
+The show "Zapping" requires `ffmpeg`. Please make sure that you have installed it first on your machine. On a mac: `brew install libav`, on Ubuntu please [follow these instructions](https://gist.github.com/xdamman/e4f713c8cd1a389a5917).
 
 Then you can proceed with the following commands:
 	
