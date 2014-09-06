@@ -130,6 +130,9 @@ module.exports = function(settings) {
     this.updateFeed = function(cb) {
 
       self.getLastItems(function(err, items) { 
+        if(err) return cb(err);
+        if(!items || items.length == 0) return cb(null);
+
         async.forEachLimit(items, 2, download, function(err, results) {
           if(err) return cb(err);
           generateFeed(items, cb);
