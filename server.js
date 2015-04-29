@@ -120,5 +120,5 @@ server.get('/stop', function(req, res, next) {
 
 if(!program.feed) {
   server.listen(server.set('port'));
-  console.info(package.name + " server v"+package.version+" listening on port "+server.set('port'));
+  console.info(package.name + " " + server.set('env')+" server v"+package.version+" listening on port "+server.set('port'));
 }

@@ -13,6 +13,7 @@ var LOGS_FILE = "./logs/ffmpeg.log";
 var MAX_ITEMS = 10;
 var DOWNLOADS_DIR = "downloads/"; 
 var TMP_DIR = "/tmp/"; 
+var FFMPEG_NICE_PRIORITY = 10; // From -20 to 20 (highest to lowest priority), default is 0
 
 var FEED_HEADER = '<?xml version="1.0" encoding="UTF-8"?> \n\
                   <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">\n\
@@ -201,7 +202,7 @@ module.exports = function(settings) {
 
         var start_time = new Date;
 
-        var ffmpeg = spawn('ffmpeg',['-y','-i',item.video,item.tmpfilepath]);
+        var ffmpeg = spawn('nice', ['-n', FFMPEG_NICE_PRIORITY,'ffmpeg','-y','-i',item.video,item.tmpfilepath]);
 
         var logs = fs.createWriteStream(LOGS_FILE, { flags: 'a' });
         ffmpeg.stdout.pipe(logs);
