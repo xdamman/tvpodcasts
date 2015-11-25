@@ -20,16 +20,17 @@
     "node": ">= v0.10.x"
   },
   "dependencies": {
-    "request": "^2.36.0",
     "async": "^0.9.0",
-    "feedparser": "^0.17.0",
+    "commander": "^2.2.0",
     "express": "^4.4.1",
     "express-logger": "0.0.3",
+    "feedparser": "^0.17.0",
     "humanize": "0.0.9",
-    "underscore": "^1.6.0",
+    "mkdirp": "^0.5.1",
     "moment": "^2.6.0",
     "nodalytics": "^1.0.0",
-    "commander": "^2.2.0"
+    "request": "^2.36.0",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "chai": "^1.9.1",

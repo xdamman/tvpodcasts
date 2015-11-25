@@ -10,7 +10,7 @@ var program = require('commander')
 
 program
   .version(package.version)
-  .usage('<feedname>','[all | zapping | petitjournal | guignols | rtbfpodcast] - E.g. zapping') 
+  .usage('<feedname>','[all | zapping | petitjournal | guignols | JT-19h30 | JT-12mn] - E.g. zapping') 
   .option('-b, --baseurl <string>', 'server base url. Default: process.env.BASE_URL || "http://localhost:12441"')
   .parse(process.argv);
 
@@ -20,42 +20,43 @@ var port = process.env.PORT || 12441;
 var settings = { base_url: program.baseurl || process.env.BASE_URL || "http://localhost:"+port };
 
 var CplusProvider = require('../providers/cplus')(settings);
+var RTBFProvider = require('../providers/rtbf')(settings);
 
 var feeds = {};
 
-var rtbf = require('../providers/rtbf');
+feeds['JT-19h30'] = new RTBFProvider({
+  title: "Journal télévisé de 19h30 de la RTBF Video Podcast (Belgique)",
+  name: "JT-19h30",
+  url: "http://rss.rtbf.be/media/rss/programmes/journal-televise-19h30.xml"
+});
 
-settings.title = "Journal télévisé de 19h30 de la RTBF Video Podcast (Belgique)";
-settings.feedname = "rtbf-19h30";
-settings.feed = "http://rss.rtbf.be/media/rss/programmes/journal-televise-19h30.xml";
-feeds['rtbf-19h30'] = rtbf(settings);
-
-settings.title = "Le 12 minutes - Journal télévisé de la RTBF Video Podcast (Belgique)";
-settings.feedname = "rtbf-12mn";
-settings.feed = "http://rss.rtbf.be/media/rss/programmes/le-12-minutes.xml";
-feeds['rtbf-12mn'] = rtbf(settings);
+feeds['JT-12mn'] = new RTBFProvider({
+  title: "Le 12 minutes - Journal télévisé de la RTBF Video Podcast (Belgique)",
+  name: "JT-12mn",
+  url: "http://rss.rtbf.be/media/rss/programmes/le-12-minutes.xml"
+});
 
 feeds['zapping'] = new CplusProvider({
-    feedname: "zapping"
+    name: "zapping"
   , title: "ザッピング"
   , description: "No description"
-  , website: 'http://www.canalplus.fr/c-infos-documentaires/pid1830-c-zapping.html'
+  , url: 'http://www.canalplus.fr/c-infos-documentaires/pid1830-c-zapping.html'
 });
 
 feeds['guignols']  = new CplusProvider({
-    feedname: "guignols"
+    name: "guignols"
   , title: "ホーン情報"
   , description: "No description"
-  , website: 'http://www.canalplus.fr/c-divertissement/pid1784-c-les-guignols.html'
+  , url: 'http://www.canalplus.fr/c-divertissement/pid1784-c-les-guignols.html'
   , filter: function(item) { return item.RUBRIQUAGE.CATEGORIE.match(/SEMAINE|QUOTIDIEN/); }
 });
 
 /*
 feeds['petitjournal'] = new CplusProvider({
-    feedname: "petitjournal"
+    name: "petitjournal"
   , title: "小さな新聞"
   , description: "No description"
-  , website: 'http://www.canalplus.fr/c-divertissement/c-le-petit-journal/pid6515-l-emission.html'
+  , url: 'http://www.canalplus.fr/c-divertissement/c-le-petit-journal/pid6515-l-emission.html'
   , max_items: 10
 });
 */

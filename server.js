@@ -10,7 +10,7 @@ var fs = require("fs")
   , exec = require('child_process').exec
   ;
 
-var AVAILABLE_FEEDS = ['zapping','guignols','petitjournal','rtbf-19h30','rtbf-12mn'];
+var AVAILABLE_FEEDS = ['zapping','guignols','petitjournal','JT-19h30','JT-12mn'];
 var FEEDS_UPDATE_INTERVAL = 12*60; // Updating the feed every 12 minutes
 
 program

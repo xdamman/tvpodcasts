@@ -1,5 +1,6 @@
 var request = require('request')
   , fs = require('fs')
+  , mkdirp = require('mkdirp')
   , async = require('async')
   , _ = require('underscore')
   , moment = require('moment')
@@ -12,6 +13,7 @@ var request = require('request')
 var LOGS_FILE = "./logs/ffmpeg.log";
 var MAX_ITEMS = 10;
 var DOWNLOADS_DIR = "downloads/"; 
+var FEEDS_DIR = "feeds/"; 
 var TMP_DIR = "/tmp/"; 
 var FFMPEG_NICE_PRIORITY = 10; // From -20 to 20 (highest to lowest priority), default is 0
 
@@ -27,25 +29,20 @@ module.exports = function(settings) {
     var self = this;
 
     this.feed = {
-        name: options.feedname
+        name: options.name
       , query: options.query
       , title: options.title
       , description: options.description
       , category: options.category || "Society &amp; Culture" || "News &amp; Politics"
-      , cover: options.cover || settings.base_url+'/img/'+options.feedname+'.jpg'
-      , website: options.website
+      , cover: options.cover || settings.base_url+'/img/'+options.name+'.jpg'
+      , website: options.url
       , max_items: options.max_items || MAX_ITEMS
       , filter: (typeof options.filter == 'function') ? options.filter : function(item) { return true; }
     };
 
     this.init = (function() {
-      if(!fs.existsSync(DOWNLOADS_DIR + 'cplus')) {
-        fs.mkdirSync(DOWNLOADS_DIR + 'cplus');
-      }
-
-      if(!fs.existsSync(DOWNLOADS_DIR + 'cplus/' + self.feed.name)) {
-        fs.mkdirSync(DOWNLOADS_DIR + 'cplus/' + self.feed.name);
-      }
+      mkdirp(DOWNLOADS_DIR + 'cplus/' + self.feed.name);
+      mkdirp(FEEDS_DIR + 'cplus/');
     })();
 
     this.getBestStream = function(m3u8, cb) {
@@ -153,7 +150,7 @@ module.exports = function(settings) {
               \t<itunes:subtitle>Video Podcast</itunes:subtitle>\n\
               \t<description>'+self.feed.description+'</description>\n\
               \t<itunes:category text="'+self.feed.category+'"/>\n\
-              \t<link>'+settings.base_url+'/feeds/cplus/'+self.feed.name+'.xml</link>\n';
+              \t<link>'+settings.base_url+'/'+FEEDS_DIR+'cplus/'+self.feed.name+'.xml</link>\n';
 
       for(var i=0;i<items.length;i++) {
         var item = items[i];
