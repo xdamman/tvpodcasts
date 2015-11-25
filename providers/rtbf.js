@@ -19,7 +19,7 @@ module.exports = function(settings) {
                     \t<title>'+settings.title+'</title> \n\
                     \t<language>fr-be</language>\n\
                     \t<itunes:author>@xdamman</itunes:author>\n\
-                    \t<itunes:image href="'+settings.base_url+'/img/rtbf-19h30.jpg" />\n\
+                    \t<itunes:image href="'+settings.base_url+'/img/'+settings.feedname+'.jpg" />\n\
                     \t<itunes:subtitle>JT Video Podcast</itunes:subtitle>\n\
                     \t<description>Retrouvez tous les jours le journal télévisé de la Radio Télévision Belge Francophone (RTBF) sur votre AppleTV, iPad ou iPhone.</description>\n\
                     \t<itunes:category text="News &amp; Politics"/>\n\
