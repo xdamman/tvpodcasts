@@ -10,7 +10,7 @@ var fs = require("fs")
   , exec = require('child_process').exec
   ;
 
-var AVAILABLE_FEEDS = ['zapping','guignols','petitjournal','rtbfpodcast'];
+var AVAILABLE_FEEDS = ['zapping','guignols','petitjournal','rtbf-19h30','rtbf-12mn'];
 var FEEDS_UPDATE_INTERVAL = 12*60; // Updating the feed every 12 minutes
 
 program
@@ -93,7 +93,7 @@ server.get('/rtbfpodcast.xml', function(req, res){
 });
 
 server.get('/', function(req, res) {
-	res.redirect("https://github.com/xdamman/rtbfpodcast");
+	res.redirect("https://github.com/xdamman/tvpodcasts");
 });
 
 server.get('/robots.txt', function(req, res) {

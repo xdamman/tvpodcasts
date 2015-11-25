@@ -1,5 +1,4 @@
 // URL of the feed you want to parse
-var FEED_URL = "http://rss.rtbf.be/media/rss/programmes/journal_t__l__vis___19h30.xml";
 var MAX_ITEMS = 2;
 var DOWNLOADS_DIR = "downloads/";
 
@@ -43,7 +42,7 @@ module.exports = function(settings) {
     console.log(start_time+": Updating RSS feed");
 
     var items = [];
-    var req = request(FEED_URL);
+    var req = request(settings.feed);
 
     req.on('response', function (res) {
       if (res.statusCode != 200) return this.emit('error', new Error('Bad status code'));
@@ -51,11 +50,11 @@ module.exports = function(settings) {
     });
 
     req.on('error', function (error) {
-      console.error("Unable to download ", FEED_URL);
+      console.error("Unable to download ", settings.feed);
     });
 
     parser.on('error', function(error) {
-      console.error("Unable to parse ", FEED_URL);
+      console.error("Unable to parse ", settings.feed);
     });
 
     parser.on('readable', function() {

@@ -23,7 +23,13 @@ var CplusProvider = require('../providers/cplus')(settings);
 
 var feeds = {};
 
-feeds['rtbfpodcast'] = require('../providers/rtbf')(settings);
+var rtbf = require('../providers/rtbf');
+
+settings.feed = "http://rss.rtbf.be/media/rss/programmes/journal-televise-19h30.xml";
+feeds['rtbf-19h30'] = rtbf(settings);
+
+settings.feed = "http://rss.rtbf.be/media/rss/programmes/le-12-minutes.xml";
+feeds['rtbf-12mn'] = rtbf(settings);
 
 feeds['zapping'] = new CplusProvider({
     feedname: "zapping"
