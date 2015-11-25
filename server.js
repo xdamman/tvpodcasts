@@ -90,10 +90,10 @@ setInterval(updateFeeds, FEEDS_UPDATE_INTERVAL * 1000);
 
 // <legacy>
 server.get('/rtbfpodcast.xml', function(req, res){
-	res.sendfile('feeds/rtbf-19h30.xml');
+	res.sendfile('feeds/rtbf/JT-19h30.xml');
 });
 server.get('/feeds/rtbfpodcast.xml', function(req, res){
-	res.sendfile('feeds/rtbf-19h30.xml');
+	res.sendfile('feeds/rtbf/JT-19h30.xml');
 });
 // </legacy>
 
