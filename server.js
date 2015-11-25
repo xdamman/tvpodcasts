@@ -88,9 +88,14 @@ function updateFeeds() {
 updateFeeds();
 setInterval(updateFeeds, FEEDS_UPDATE_INTERVAL * 1000);
 
+// <legacy>
 server.get('/rtbfpodcast.xml', function(req, res){
-	res.sendfile('feeds/rtbfpodcast.xml');
+	res.sendfile('feeds/rtbf-19h30.xml');
 });
+server.get('/feeds/rtbfpodcast.xml', function(req, res){
+	res.sendfile('feeds/rtbf-19h30.xml');
+});
+// </legacy>
 
 server.get('/', function(req, res) {
 	res.redirect("https://github.com/xdamman/tvpodcasts");

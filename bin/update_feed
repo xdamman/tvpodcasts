@@ -25,9 +25,13 @@ var feeds = {};
 
 var rtbf = require('../providers/rtbf');
 
+settings.title = "Journal télévisé de 19h30 de la RTBF Video Podcast (Belgique)";
+settings.feedname = "rtbf-19h30";
 settings.feed = "http://rss.rtbf.be/media/rss/programmes/journal-televise-19h30.xml";
 feeds['rtbf-19h30'] = rtbf(settings);
 
+settings.title = "Le 12 minutes - Journal télévisé de la RTBF Video Podcast (Belgique)";
+settings.feedname = "rtbf-12mn";
 settings.feed = "http://rss.rtbf.be/media/rss/programmes/le-12-minutes.xml";
 feeds['rtbf-12mn'] = rtbf(settings);
 
